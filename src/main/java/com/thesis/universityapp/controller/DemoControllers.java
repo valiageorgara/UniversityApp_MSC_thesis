@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1")
+@RequestMapping("/api/v1/")
 public class DemoControllers {
 
     @Autowired
@@ -20,7 +20,7 @@ public class DemoControllers {
         return studentRepository.findAll();
     }
 
-    @PostMapping("/employees")
+    @PostMapping("/create")
     public Student createEmployee(@RequestBody Student employee) {
         return studentRepository.save(employee);
     }

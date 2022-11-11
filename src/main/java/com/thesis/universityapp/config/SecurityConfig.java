@@ -1,5 +1,6 @@
 package com.thesis.universityapp.config;
 
+import org.keycloak.adapters.KeycloakConfigResolver;
 import org.keycloak.adapters.springboot.KeycloakSpringBootConfigResolver;
 import org.keycloak.adapters.springsecurity.KeycloakConfiguration;
 import org.keycloak.adapters.springsecurity.authentication.KeycloakAuthenticationProvider;
@@ -44,15 +45,20 @@ public class SecurityConfig extends KeycloakWebSecurityConfigurerAdapter
     protected SessionRegistry buildSessionRegistry() {
         return new SessionRegistryImpl();
     }
+    //use below code for application.properties instead of WEB-INF/keycloack.json
+    @Bean
+    public KeycloakConfigResolver KeycloakConfigResolver() {
+        return new KeycloakSpringBootConfigResolver();
+    }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception
     {
         super.configure(http);
+        http.csrf().disable();
         http
                 .authorizeRequests()
-//                .antMatchers("/customers*").hasRole("USER")
-//                .antMatchers("/admin*").hasRole("ADMIN")
+                .antMatchers("/api/v1/employees","/api/v1/create").hasRole("user")
                 .anyRequest().permitAll();
     }
 }
