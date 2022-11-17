@@ -9,15 +9,19 @@ public class Student {
     private long id;
     private String firstName;
     private String lastName;
-    private String emailId;
+    private String email;
+    private  String password;
 
     public Student() {
-
+    // blind constructor
     }
-    public Student(String firstName, String lastName, String emailId) {
+
+    public Student(String firstName, String lastName, String email, String password) {
+        super();
         this.firstName = firstName;
         this.lastName = lastName;
-        this.emailId = emailId;
+        this.email = email;
+        this.password = password;
     }
 
     @Id
@@ -46,16 +50,27 @@ public class Student {
     }
 
     @Column(name = "email_address", nullable = true)
-    public String getEmailId() {
-        return emailId;
+    public String getEmail() {
+        return email;
     }
-    public void setEmailId(String emailId) {
-        this.emailId = emailId;
+    public void setEmail(String email) {
+        this.email = email;
     }
+
+    @Column(name = "student_password", nullable = true)
+    public String getPassword() {
+        return password;
+    }
+    public void setPassword(String password) { this.password = password;    }
 
     @Override
     public String toString() {
-        return "Student [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", emailId=" + emailId
-                + "]";
+        return "Student{" +
+                "studentID=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                '}';
     }
 }
