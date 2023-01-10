@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/v1/")
 public class StudentController {
 
-    private StudentService studentService;
+    private final StudentService studentService;
 
     public StudentController(StudentService studentService) {
         super();
@@ -24,6 +24,7 @@ public class StudentController {
     }
 
     // handler method to handle list students and return mode and view
+    @CrossOrigin(origins = "http://localhost:8080")
     @GetMapping("/students")
     public List<Student> listStudents() {
        return studentService.getAllStudents();
