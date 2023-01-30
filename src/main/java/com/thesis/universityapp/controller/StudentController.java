@@ -1,26 +1,27 @@
 package com.thesis.universityapp.controller;
 
 import java.util.List;
+
+import com.thesis.universityapp.model.Application;
+import com.thesis.universityapp.service.ApplicationService;
 import org.springframework.ui.Model;
 
-import org.springframework.stereotype.Service;
-
 import com.thesis.universityapp.model.Student;
-import com.thesis.universityapp.repository.StudentRepository;
 import com.thesis.universityapp.service.StudentService;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/v1/")
+@RequestMapping("/api/")
 public class StudentController {
 
     private final StudentService studentService;
+    private final ApplicationService applicationService;
 
-    public StudentController(StudentService studentService) {
+    public StudentController(StudentService studentService, ApplicationService applicationService) {
         super();
         this.studentService = studentService;
+        this.applicationService = applicationService;
     }
 
     // handler method to handle list students and return mode and view
@@ -28,6 +29,10 @@ public class StudentController {
     @GetMapping("/students")
     public List<Student> listStudents() {
        return studentService.getAllStudents();
+    }
+    @GetMapping("/applications")
+    public List<Application> listApplications() {
+        return applicationService.getAllApplications();
     }
 
     @GetMapping("/students/new")
@@ -39,13 +44,14 @@ public class StudentController {
         return "create_student";
 
     }
-
     @PostMapping("/students")
     public String saveStudent(@RequestBody Student student) {
         System.out.println(student.toString());
         studentService.saveStudent(student);
         return "redirect:/students";
     }
+
+
 
     @GetMapping("/students/edit/{id}")
     public String editStudentForm(@PathVariable Long id, Model model) {

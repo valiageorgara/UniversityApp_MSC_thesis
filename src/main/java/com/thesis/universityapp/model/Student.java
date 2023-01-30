@@ -1,76 +1,93 @@
 package com.thesis.universityapp.model;
 
+
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "student")
 public class Student {
-
-    private long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @Column(name = "first_name", nullable = false)
     private String firstName;
+    @Column(name = "last_name", nullable = false)
     private String lastName;
+    @Column(name = "email_address", nullable = true)
     private String email;
-    private  String password;
+
+    @OneToMany(mappedBy = "student",cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Application> applications =new ArrayList<>();
 
     public Student() {
     // blind constructor
     }
 
-    public Student(String firstName, String lastName, String email, String password) {
-        super();
+    public Student(Long id, String firstName, String lastName, String email, List<Application> applications) {
+        this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
-        this.password = password;
+        this.applications = applications;
     }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public long getId() {
+    public Student(String firstName, String lastName, String email, List<Application> applications) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.applications = applications;
+    }
+
+    public Long getId() {
         return id;
     }
-    public void setId(long id) {
+
+    public void setId(Long id) {
         this.id = id;
     }
 
-    @Column(name = "first_name", nullable = false)
     public String getFirstName() {
         return firstName;
     }
+
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
 
-    @Column(name = "last_name", nullable = false)
     public String getLastName() {
         return lastName;
     }
+
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
 
-    @Column(name = "email_address", nullable = true)
     public String getEmail() {
         return email;
     }
+
     public void setEmail(String email) {
         this.email = email;
     }
 
-    @Column(name = "student_password", nullable = true)
-    public String getPassword() {
-        return password;
+    public List<Application> getApplications() {
+        return applications;
     }
-    public void setPassword(String password) { this.password = password;    }
+
+    public void setApplications(List<Application> applications) {
+        this.applications = applications;
+    }
 
     @Override
     public String toString() {
         return "Student{" +
-                "studentID=" + id +
+                "id=" + id +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
+                ", applications=" + applications +
                 '}';
     }
 }
