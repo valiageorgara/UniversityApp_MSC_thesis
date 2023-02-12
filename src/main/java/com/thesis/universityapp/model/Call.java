@@ -21,11 +21,11 @@ public class Call {
     @Column(name = "priority", nullable = false)
     private Integer priority;
 
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "university_id")
     private University university;
-    @OneToMany(mappedBy = "call",cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Application> applications =new ArrayList<>();
+//    @OneToMany(mappedBy = "call",cascade = CascadeType.ALL, orphanRemoval = true)
+//    private List<Application> applications =new ArrayList<>();
 
     public Call(Long id, Date expiration, String title, Integer priority, University university, List<Application> applications) {
         this.id = id;
@@ -33,7 +33,7 @@ public class Call {
         this.title = title;
         this.priority = priority;
         this.university = university;
-        this.applications = applications;
+//        this.applications = applications;
     }
 
     public Call(Date expiration, String title, Integer priority, University university) {
@@ -88,11 +88,11 @@ public class Call {
         this.university = university;
     }
 
-    public List<Application> getApplications() {
-        return applications;
-    }
-
-    public void setApplications(List<Application> applications) {
-        this.applications = applications;
-    }
+//    public List<Application> getApplications() {
+//        return applications;
+//    }
+//
+//    public void setApplications(List<Application> applications) {
+//        this.applications = applications;
+//    }
 }

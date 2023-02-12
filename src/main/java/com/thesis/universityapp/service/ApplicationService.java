@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface ApplicationService {
     List<Application> getAllApplications();
+    Application saveApplication(Application application);
+
 }

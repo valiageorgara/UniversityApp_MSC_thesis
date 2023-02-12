@@ -10,24 +10,24 @@ import java.util.List;
 public class University {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "university_id", nullable = false)
+    @Column(name = "university_id")
     private long universityID;
     @Column(name = "university_name", nullable = false)
     private String name;
     @Column(name = "email_address", nullable = true)
-
     private String email;
     @OneToMany(mappedBy = "university",cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Call> calls =new ArrayList<>();
+    private List<Call> calls = new ArrayList<>();
 
     public University() {
     // blind constructor
     }
 
-    public University(String name, String email) {
+    public University(String name, String email, List<Call> calls) {
         super();
         this.name = name;
         this.email = email;
+        this.calls = calls;
     }
 
 
@@ -40,6 +40,14 @@ public class University {
 
     public String getEmail() { return email; }
     public void setEmail(String email) { this.email = email; }
+
+    public List<Call> getCalls() {
+        return calls;
+    }
+
+    public void setCalls(List<Call> calls) {
+        this.calls = calls;
+    }
 
     @Override
     public String toString() {
