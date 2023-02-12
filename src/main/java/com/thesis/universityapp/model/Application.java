@@ -22,15 +22,14 @@ public class Application {
     @JsonIgnore
     private Student student;
 
-    @ManyToOne
-    @JoinColumn(name = "call_id")
-    private Call call;
+//    @ManyToOne
+//    @JoinColumn(name = "call_id")
+//    private Call call;
 
-    public Application(long id, Date time, Student student, Call call) {
+    public Application(long id, Date time, Student student) {
         this.id = id;
         this.time = time;
         this.student = student;
-        this.call = call;
     }
 
     public Application() {
@@ -59,13 +58,5 @@ public class Application {
 
     public void setStudent(Student student) {
         this.student = student;
-    }
-
-    public Call getCall() {
-        return call;
-    }
-
-    public void setCall(Call call) {
-        this.call = call;
     }
 }
