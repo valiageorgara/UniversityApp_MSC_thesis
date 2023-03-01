@@ -2,8 +2,7 @@ package com.thesis.universityapp.model;
 
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
+
 
 @Entity
 @Table(name = "student")
@@ -18,26 +17,26 @@ public class Student {
     @Column(name = "email_address", nullable = true)
     private String email;
 
-    @OneToMany(mappedBy = "student",cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Application> applications =new ArrayList<>();
+//    @OneToMany(mappedBy = "student",cascade = CascadeType.ALL, orphanRemoval = true)
+//    private List<Application> applications =new ArrayList<>();
 
     public Student() {
     // blind constructor
     }
 
-    public Student(Long id, String firstName, String lastName, String email, List<Application> applications) {
+    public Student(Long id, String firstName, String lastName, String email) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
-        this.applications = applications;
+//        this.applications = applications;
     }
 
-    public Student(String firstName, String lastName, String email, List<Application> applications) {
+    public Student(String firstName, String lastName, String email) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
-        this.applications = applications;
+//        this.applications = applications;
     }
 
     public Long getId() {
@@ -72,13 +71,6 @@ public class Student {
         this.email = email;
     }
 
-    public List<Application> getApplications() {
-        return applications;
-    }
-
-    public void setApplications(List<Application> applications) {
-        this.applications = applications;
-    }
 
     @Override
     public String toString() {
@@ -87,7 +79,6 @@ public class Student {
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
-                ", applications=" + applications +
                 '}';
     }
 }

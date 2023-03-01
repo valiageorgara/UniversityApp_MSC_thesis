@@ -17,12 +17,19 @@ public class UniversityServiceImpl implements UniversityService {
     }
     @Override
     public List<University> getAllUniversities() {
-        return universityRepository.findAll();
+        List<University> universities = universityRepository.findAll();
+        universities.forEach(u -> {
+            u.getDepartments().size(); // force load departments
+        });
+        return universities;
+    }
+    @Override
+    public List<University> findAllWithDepartments() {
+        return universityRepository.findAllWithDepartments();
     }
 
     @Override
     public University saveUniversity(University university) {
-        System.out.println(university.toString());
         return universityRepository.save(university);
     }
 }

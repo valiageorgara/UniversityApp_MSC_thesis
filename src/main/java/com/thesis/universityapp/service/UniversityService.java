@@ -7,5 +7,6 @@ import java.util.List;
 
 public interface UniversityService {
     List<University> getAllUniversities();
+    List<University> findAllWithDepartments();
     University saveUniversity(University university);
 }
