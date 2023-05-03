@@ -3,9 +3,10 @@ package com.thesis.universityapp.service.impl;
 import com.thesis.universityapp.model.Master;
 import com.thesis.universityapp.repository.MasterRepository;
 import com.thesis.universityapp.service.MasterService;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+@Service
 public class MasterServiceImpl implements MasterService {
 
     private final MasterRepository masterRepository;

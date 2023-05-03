@@ -14,13 +14,13 @@ public class StreamPref {
     private Integer priority;
     @ManyToOne
     @JoinColumn(name = "stream_id")
-    private Streams stream;
+    private Stream stream;
 
     @ManyToOne
     @JoinColumn(name = "application_id")
     private Application application;
 
-    public StreamPref(Long id, String streamName, Integer priority, Streams stream, Application application) {
+    public StreamPref(Long id, String streamName, Integer priority, Stream stream, Application application) {
         this.id = id;
         this.streamName = streamName;
         this.priority = priority;
@@ -28,11 +28,11 @@ public class StreamPref {
         this.application = application;
     }
 
-    public Streams getStream() {
+    public Stream getStream() {
         return stream;
     }
 
-    public void setStream(Streams stream) {
+    public void setStream(Stream stream) {
         this.stream = stream;
     }
 

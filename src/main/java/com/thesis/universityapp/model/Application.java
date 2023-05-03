@@ -7,7 +7,6 @@ import org.hibernate.annotations.OnDeleteAction;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Date;
-
 @Entity
 @Table(name = "application")
 public class Application {
@@ -16,17 +15,13 @@ public class Application {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "student_id")
-    private Student student;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "keycloak_user_id", referencedColumnName = "id")
+    private KeycloakUser keycloakUser;
 
     @ManyToOne
     @JoinColumn(name = "master_id")
     private Master master;
-
-    @ManyToOne
-    @JoinColumn(name = "department_id")
-    private Department department;
 
     @Column(name = "type")
     private String type;
@@ -37,21 +32,20 @@ public class Application {
     @Column(name = "date_expiration")
     private LocalDate dateExpiration;
 
-    // getters and setters
+    // constructors, getters, and setters
 
-    public Application(Long id, Student student, Master master, Department department, String type, String status, LocalDate dateExpiration) {
+    public Application(Long id, KeycloakUser keycloakUser, Master master, String type, String status, LocalDate dateExpiration) {
         this.id = id;
-        this.student = student;
+        this.keycloakUser = keycloakUser;
         this.master = master;
-        this.department = department;
         this.type = type;
         this.status = status;
         this.dateExpiration = dateExpiration;
     }
 
-    public Application() {
+    public Application() {}
 
-    }
+    // getters and setters
 
     public Long getId() {
         return id;
@@ -61,12 +55,12 @@ public class Application {
         this.id = id;
     }
 
-    public Student getStudent() {
-        return student;
+    public KeycloakUser getKeycloakUser() {
+        return keycloakUser;
     }
 
-    public void setStudent(Student student) {
-        this.student = student;
+    public void setKeycloakUser(KeycloakUser keycloakUser) {
+        this.keycloakUser = keycloakUser;
     }
 
     public Master getMaster() {
@@ -75,14 +69,6 @@ public class Application {
 
     public void setMaster(Master master) {
         this.master = master;
-    }
-
-    public Department getDepartment() {
-        return department;
-    }
-
-    public void setDepartment(Department department) {
-        this.department = department;
     }
 
     public String getType() {
@@ -109,4 +95,3 @@ public class Application {
         this.dateExpiration = dateExpiration;
     }
 }
-

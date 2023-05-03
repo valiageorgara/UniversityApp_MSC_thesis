@@ -12,7 +12,7 @@ services:
       - DB_USER=keycloak
       - DB_PASSWORD=password
     ports:
-      - 8081:8080
+      - "8081:8080"
     depends_on:
       - postgres
   postgres:
@@ -21,19 +21,5 @@ services:
       - POSTGRES_DB=keycloak
       - POSTGRES_USER=keycloak
       - POSTGRES_PASSWORD=password
-    volumes:
-      - /home/valia/Desktop/Thesis/volumes/postgres_keycloak/jboss/data:/var/lib/postgresql/data
-  main-postgres:
-    image: postgres
-    environment:
-      - POSTGRES_DB=appdb
-      - POSTGRES_USER=main_user
-      - POSTGRES_PASSWORD=admin
     ports:
-      - 5432:5432
-    volumes:
-      - /home/valia/Desktop/Thesis/volumes/postgrs/jboss/data:/var/lib/postgresql/data
-
-volumes:
-  keycloak-postgres-data:
-  main-postgres-data:
+      - "5432:5432"

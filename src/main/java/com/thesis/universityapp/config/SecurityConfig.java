@@ -6,6 +6,8 @@ import org.keycloak.adapters.springsecurity.KeycloakConfiguration;
 import org.keycloak.adapters.springsecurity.authentication.KeycloakAuthenticationProvider;
 import org.keycloak.adapters.springsecurity.config.KeycloakWebSecurityConfigurerAdapter;
 import org.keycloak.events.EventListenerProviderFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
@@ -25,6 +27,7 @@ import javax.annotation.PostConstruct;
 @Import(KeycloakSpringBootConfigResolver.class)
 public class SecurityConfig extends KeycloakWebSecurityConfigurerAdapter
 {
+    private static final Logger logger = LoggerFactory.getLogger(SecurityConfig.class);
 
     /**
      * Registers the KeycloakAuthenticationProvider with the authentication manager.
@@ -59,6 +62,7 @@ public class SecurityConfig extends KeycloakWebSecurityConfigurerAdapter
     @Override
     protected void configure(HttpSecurity http) throws Exception
     {
+
         super.configure(http);
         http.csrf().disable();
         http

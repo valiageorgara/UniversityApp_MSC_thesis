@@ -1,29 +1,32 @@
 package com.thesis.universityapp.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "streams")
-public class Streams {
+public class Stream {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "master_id")
+    @JsonIgnoreProperties({"department"})
     private Master master;
 
     @Column(name = "name")
     private String name;
 
-    public Streams(Long id, Master master, String name) {
+    public Stream(Long id, Master master, String name) {
         this.id = id;
         this.master = master;
         this.name = name;
     }
 
-    public Streams() {
+    public Stream() {
 
     }
 

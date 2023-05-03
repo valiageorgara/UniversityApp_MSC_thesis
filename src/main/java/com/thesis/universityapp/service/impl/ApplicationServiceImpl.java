@@ -1,6 +1,7 @@
 package com.thesis.universityapp.service.impl;
 
 import com.thesis.universityapp.model.Application;
+import com.thesis.universityapp.model.KeycloakUser;
 import com.thesis.universityapp.model.Student;
 import com.thesis.universityapp.repository.ApplicationRepository;
 import com.thesis.universityapp.repository.StudentRepository;
@@ -26,4 +27,9 @@ public class ApplicationServiceImpl implements ApplicationService {
     public Application saveApplication(Application application) {
         return applicationRepository.save(application);
     }
+    @Override
+    public List<Application> findByKeycloakUser(KeycloakUser keycloakUser){
+        return applicationRepository.findByKeycloakUser(keycloakUser);
+    }
+
 }

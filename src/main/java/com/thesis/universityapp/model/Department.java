@@ -1,5 +1,7 @@
 package com.thesis.universityapp.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 
 @Entity

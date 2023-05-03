@@ -8,15 +8,17 @@ import javax.persistence.*;
 @Table(name = "student")
 public class Student {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private String id;
     @Column(name = "first_name", nullable = false)
     private String firstName;
     @Column(name = "last_name", nullable = false)
     private String lastName;
     @Column(name = "email_address", nullable = true)
     private String email;
-
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "keycloak_user_id", referencedColumnName = "id")
+    private KeycloakUser keycloakUser;
 //    @OneToMany(mappedBy = "student",cascade = CascadeType.ALL, orphanRemoval = true)
 //    private List<Application> applications =new ArrayList<>();
 
@@ -24,7 +26,7 @@ public class Student {
     // blind constructor
     }
 
-    public Student(Long id, String firstName, String lastName, String email) {
+    public Student(String id, String firstName, String lastName, String email) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -39,11 +41,19 @@ public class Student {
 //        this.applications = applications;
     }
 
-    public Long getId() {
+    public KeycloakUser getKeycloakUser() {
+        return keycloakUser;
+    }
+
+    public void setKeycloakUser(KeycloakUser keycloakUser) {
+        this.keycloakUser = keycloakUser;
+    }
+
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

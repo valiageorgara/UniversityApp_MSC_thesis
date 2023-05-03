@@ -1,5 +1,7 @@
 package com.thesis.universityapp.service.impl;
 import java.util.List;
+
+import com.thesis.universityapp.model.KeycloakUser;
 import org.springframework.stereotype.Service;
 
 import com.thesis.universityapp.model.Student;
@@ -8,7 +10,7 @@ import com.thesis.universityapp.service.StudentService;
 
 @Service
 public class StudentServiceImpl implements StudentService{
-    private StudentRepository studentRepository;
+    private final StudentRepository studentRepository;
 
     public StudentServiceImpl(StudentRepository studentRepository) {
         super();
@@ -16,27 +18,27 @@ public class StudentServiceImpl implements StudentService{
     }
 
     @Override
-    public List<Student> getAllStudents() {
+    public List<KeycloakUser> getAllStudents() {
         return studentRepository.findAll();
     }
 
     @Override
-    public Student saveStudent(Student student) {
+    public KeycloakUser saveStudent(KeycloakUser student) {
         return studentRepository.save(student);
     }
 
     @Override
-    public Student getStudentById(Long id) {
+    public KeycloakUser getStudentById(String id) {
         return studentRepository.findById(id).get();
     }
 
     @Override
-    public Student updateStudent(Student student) {
+    public KeycloakUser updateStudent(KeycloakUser student) {
         return studentRepository.save(student);
     }
 
     @Override
-    public void deleteStudentById(Long id) {
+    public void deleteStudentById(String id) {
         studentRepository.deleteById(id);
     }
 }
