@@ -12,7 +12,7 @@ import java.security.Principal;
 @RestController
 @RequestMapping("/api/universities/")
 public class UniversityController {
-    @GetMapping("user-info")
+    @GetMapping("user-infos")
     public String userInfoController(Principal principal) {
 
         KeycloakAuthenticationToken keycloakAuthenticationToken = (KeycloakAuthenticationToken) principal;

@@ -12,9 +12,8 @@ import java.security.Principal;
 @RestController
 @RequestMapping("/api/students/")
 public class StudentController {
-    @GetMapping("user-info")
+    @GetMapping("user-infos")
     public String userInfoController(Principal principal) {
-
         KeycloakAuthenticationToken keycloakAuthenticationToken = (KeycloakAuthenticationToken) principal;
         AccessToken accessToken = keycloakAuthenticationToken.getAccount().getKeycloakSecurityContext().getToken();
         KeycloakSecurityContext session = ((KeycloakAuthenticationToken) principal).getAccount().getKeycloakSecurityContext();

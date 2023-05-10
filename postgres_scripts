@@ -1,0 +1,20 @@
+CREATE OR REPLACE FUNCTION link_user_entity_to_student_or_university()
+RETURNS TRIGGER AS $$
+BEGIN
+  -- Check if the new user_entity record has a role of 'student'
+  IF (SELECT name FROM keycloak_role WHERE id = NEW.id) = 'student' THEN
+    -- Insert a new record in the student table with the user_entity_id of the new user_entity record
+    INSERT INTO student (id) VALUES (NEW.id);
+  -- Check if the new user_entity record has a role of 'university'
+  ELSIF (SELECT name FROM keycloak_role WHERE id = NEW.id) = 'university' THEN
+    -- Insert a new record in the university table with the user_entity_id of the new user_entity record
+    INSERT INTO university (id) VALUES (NEW.id);
+  END IF;
+  RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE OR replace TRIGGER link_user_entity_to_student_or_university_trigger
+AFTER INSERT ON user_role_mapping
+FOR EACH ROW
+EXECUTE FUNCTION link_user_entity_to_student_or_university();
