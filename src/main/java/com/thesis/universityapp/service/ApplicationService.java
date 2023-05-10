@@ -10,5 +10,5 @@ public interface ApplicationService {
     List<Application> getAllApplications();
     Application saveApplication(Application application);
 
-    List<Application> findByKeycloakUser(KeycloakUser keycloakUser);
+//    List<Application> findByKeycloakUser(KeycloakUser keycloakUser);
 }

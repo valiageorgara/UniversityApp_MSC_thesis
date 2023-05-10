@@ -1,7 +1,6 @@
 
 package com.thesis.universityapp.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
@@ -12,9 +11,8 @@ import java.util.List;
 @Table(name = "university")
 public class University {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "university_id")
-    private long universityID;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private String id;
     @Column(name = "university_name", nullable = false)
     private String name;
     @Column(name = "email_address", nullable = true)
@@ -24,6 +22,10 @@ public class University {
     @OneToMany(mappedBy = "university", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonIgnoreProperties("university")
     private List<Department> departments = new ArrayList<>();
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "keycloak_user_id", referencedColumnName = "id")
+    private KeycloakUser keycloakUser;
 
     public University() {
     // blind constructor
@@ -45,8 +47,8 @@ public class University {
         this.departments = departments;
     }
 
-    public Long getUniversityID() { return universityID; }
-    public void setUniversityID(long universityID) { this.universityID = universityID; }
+    public String getUniversityID() { return id; }
+    public void setUniversityID(String universityID) { this.id = universityID; }
 
 
     public String getName() { return name; }
@@ -60,7 +62,7 @@ public class University {
     @Override
     public String toString() {
         return "University{" +
-                "universityID=" + universityID +
+                "universityID=" + id +
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
                 '}';

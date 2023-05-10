@@ -10,6 +10,6 @@ import java.util.List;
 
 @Repository
 public interface ApplicationRepository extends JpaRepository<Application, Long> {
-    List<Application> findByKeycloakUser(KeycloakUser keycloakUser);
+//    List<Application> findByKeycloakUser(KeycloakUser keycloakUser);
 
 }

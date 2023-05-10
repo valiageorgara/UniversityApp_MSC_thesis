@@ -27,9 +27,9 @@ public class ApplicationServiceImpl implements ApplicationService {
     public Application saveApplication(Application application) {
         return applicationRepository.save(application);
     }
-    @Override
-    public List<Application> findByKeycloakUser(KeycloakUser keycloakUser){
-        return applicationRepository.findByKeycloakUser(keycloakUser);
-    }
+//    @Override
+//    public List<Application> findByKeycloakUser(KeycloakUser keycloakUser){
+//        return applicationRepository.findByKeycloakUser(keycloakUser);
+//    }
 
 }

@@ -16,8 +16,8 @@ public class Application {
     private Long id;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "keycloak_user_id", referencedColumnName = "id")
-    private KeycloakUser keycloakUser;
+    @JoinColumn(name = "student_id", referencedColumnName = "id")
+    private Student student;
 
     @ManyToOne
     @JoinColumn(name = "master_id")
@@ -34,9 +34,9 @@ public class Application {
 
     // constructors, getters, and setters
 
-    public Application(Long id, KeycloakUser keycloakUser, Master master, String type, String status, LocalDate dateExpiration) {
+    public Application(Long id, Student student, Master master, String type, String status, LocalDate dateExpiration) {
         this.id = id;
-        this.keycloakUser = keycloakUser;
+        this.student = student;
         this.master = master;
         this.type = type;
         this.status = status;
@@ -55,12 +55,12 @@ public class Application {
         this.id = id;
     }
 
-    public KeycloakUser getKeycloakUser() {
-        return keycloakUser;
+    public Student getStudent() {
+        return student;
     }
 
-    public void setKeycloakUser(KeycloakUser keycloakUser) {
-        this.keycloakUser = keycloakUser;
+    public void setStudent(Student student) {
+        this.student = student;
     }
 
     public Master getMaster() {
